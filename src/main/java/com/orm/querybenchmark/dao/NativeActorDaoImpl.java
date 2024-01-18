@@ -23,8 +23,8 @@ public class NativeActorDaoImpl implements ActorDAO{
             return jdbcTemplate.query(query, new ActorRowMapper());
         }catch (Exception e){
             log.error(e.getMessage());
-            throw e;
         }
+        return null;
     }
 
     @Override
@@ -32,15 +32,44 @@ public class NativeActorDaoImpl implements ActorDAO{
         // TODO notice it error prone missed actor_id and typed id only
         String query = "SELECT * FROM public.actor where public.actor.actor_id = ?";
         try{
-            return jdbcTemplate.queryForObject(query, new ActorRowMapper(), new Object[]{id});
+            return jdbcTemplate.queryForObject(query, new ActorRowMapper(), id);
         }
         catch (Exception e){
             log.error(e.getMessage());
-            throw e;
         }
+        return null;
     }
 
     @Override
     public void save(Actor actor) {
     }
+
+    @Override
+    public List<Actor> findAllByCategory(String category) {
+        String query = "SELECT act.* FROM actor act JOIN film_actor ON act.actor_id = film_actor.actor_id\n" +
+                "JOIN (SELECT f.film_id FROM film f JOIN\n" +
+                "\t category cat ON f.category_id = cat.category_id WHERE cat.name = ? ) AS subfilm \n" +
+                "\t ON film_actor.film_id=subfilm.film_id;";
+        try{
+            return jdbcTemplate.query(query, new ActorRowMapper(), category);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public List<Actor> findAllByFilmReleaseYear(Integer year) {
+        String query = "SELECT act.* FROM actor act join\n" +
+                "film_actor ON act.actor_id = film_actor.actor_id\n" +
+                "JOIN film f ON film_actor.film_id = f.film_id \n" +
+                "where f.release_year = ? ;";
+        try{
+            return jdbcTemplate.query(query, new ActorRowMapper(), year);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return null;
+    }
+
 }
