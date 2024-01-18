@@ -2,7 +2,13 @@ package com.orm.querybenchmark.dao;
 
 import com.orm.querybenchmark.entity.Actor;
 
-public interface ActorDAO {
+import java.util.List;
 
-    Actor save(Actor actor);
+public interface ActorDAO {
+    //select
+    List<Actor> findAll();
+    Actor findById(Integer id);
+    //insert
+    //delete
+
 }
