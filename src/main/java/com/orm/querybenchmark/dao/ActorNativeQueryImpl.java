@@ -23,7 +23,7 @@ public class ActorNativeQueryImpl implements ActorDAO {
     }
 
     @Override
-    public Actor save(Actor actor) {
-        return null;
+    public void save(Actor actor) {
+
     }
 }

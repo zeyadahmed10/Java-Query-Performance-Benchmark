@@ -9,7 +9,7 @@ public interface ActorDAO {
     List<Actor> findAll();
     Actor findById(Integer id);
     //insert
-    Actor save(Actor actor);
+    void save(Actor actor);
     //delete
 
 }
