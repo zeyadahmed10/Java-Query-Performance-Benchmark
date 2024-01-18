@@ -1,9 +1,6 @@
 package com.orm.querybenchmark.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
@@ -17,6 +14,7 @@ import java.util.Set;
 public class Category {
     @Id
     @Column(name = "category_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String name;
 }
