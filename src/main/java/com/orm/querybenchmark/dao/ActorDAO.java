@@ -13,5 +13,6 @@ public interface ActorDAO {
     //delete
     //join with sub queries
     List<Actor> findAllByCategory(String category);
+    //join
     List<Actor> findAllByFilmReleaseYear(Integer year);
 }
