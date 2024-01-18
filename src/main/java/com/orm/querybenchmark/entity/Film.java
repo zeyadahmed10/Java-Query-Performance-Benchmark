@@ -15,7 +15,6 @@ import java.util.Set;
 public class Film {
     @Id
     @Column(name = "film_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String title;
     private String description;

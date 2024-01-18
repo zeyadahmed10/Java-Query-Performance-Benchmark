@@ -15,7 +15,6 @@ import java.util.Set;
 public class Category {
     @Id
     @Column(name = "category_id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String name;
 }

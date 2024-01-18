@@ -14,7 +14,6 @@ import java.util.Set;
 @Builder
 public class Actor {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "actor_id", nullable = false)
     private Integer id;
 
