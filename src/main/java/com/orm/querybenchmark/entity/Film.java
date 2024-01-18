@@ -11,6 +11,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Film {
     @Id
     @Column(name = "film_id", nullable = false)

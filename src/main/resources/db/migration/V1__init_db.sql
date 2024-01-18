@@ -1,4 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS public;
+sequence actor_seq start with 1 increment by 50
+sequence category_seq start with 1 increment by 50
+sequence film_seq start with 1 increment by 50
 CREATE TABLE IF NOT EXISTS public.actor
 (
     actor_id integer NOT NULL,

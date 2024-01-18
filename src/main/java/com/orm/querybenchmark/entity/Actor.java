@@ -11,6 +11,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
