@@ -21,4 +21,9 @@ public class ActorNativeQueryImpl implements ActorDAO {
     public Actor findById(Integer id) {
         return actorRepository.nativeFindById(id);
     }
+
+    @Override
+    public Actor save(Actor actor) {
+        return null;
+    }
 }
