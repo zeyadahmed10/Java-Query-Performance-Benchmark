@@ -100,9 +100,9 @@
 						<target>
 							<directory>src/main/java</directory>
 						</target>
-<!--						<database>-->
-<!--							<excludes>databasechangelog|databasechangeloglock</excludes>-->
-<!--						</database>-->
+						<database>
+							<includes>actor|film|category|film_actor</includes>
+						</database>
 					</generator>
 				</configuration>
 			</plugin>
