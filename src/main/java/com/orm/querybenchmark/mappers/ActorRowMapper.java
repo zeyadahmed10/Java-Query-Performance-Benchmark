@@ -27,7 +27,7 @@ public class ActorRowMapper implements RowMapper<Actor> {
                 .firstName(record.get(ACTOR.FIRST_NAME))
                 .lastName(record.get(ACTOR.LAST_NAME)).build();
     }
-    public static List<Actor> mapActorRecord(Result<Record> records){
+    public static <R extends Record> List<Actor> mapActorRecord(Result<R> records){
         List<Actor> actors = new ArrayList<Actor>();
         for(var record: records){
             actors.add(Actor.builder().id(record.get(ACTOR.ACTOR_ID))
