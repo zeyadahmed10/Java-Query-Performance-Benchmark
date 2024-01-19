@@ -58,6 +58,17 @@ public class ActorDaoHqlImpl implements ActorDAO{
 
     @Override
     public List<Actor> findAllByFilmReleaseYear(Integer year) {
-        return null;
+        List<Actor> actors = null;
+        try(Session session = sessionFactory.openSession()){
+            session.beginTransaction();
+            String hql = "from Actor act JOIN act.films f where f.releaseYear = :year ";
+            Query query = session.createQuery(hql, Actor.class);
+            query.setParameter("year", year);
+            actors = query.getResultList();
+            session.getTransaction().commit();
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
+        return actors;
     }
 }
