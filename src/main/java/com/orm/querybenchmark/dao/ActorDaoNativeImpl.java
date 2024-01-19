@@ -60,10 +60,9 @@ public class ActorDaoNativeImpl implements ActorDAO{
 
     @Override
     public List<Actor> findAllByFilmReleaseYear(Integer year) {
-        String query = "SELECT act.* FROM actor act join\n" +
-                "film_actor ON act.actor_id = film_actor.actor_id\n" +
-                "JOIN film f ON film_actor.film_id = f.film_id \n" +
-                "where f.release_year = ? ;";
+        String query = "select Distinct actor.actor_id, actor.first_name, actor.last_name" +
+                " from actor join film_actor fa on actor.actor_id = fa.actor_id\n" +
+                "join film f on fa.film_id = f.film_id where f.release_year = ?;";
         try{
             return jdbcTemplate.query(query, new ActorRowMapper(), year);
         }catch (Exception e){
