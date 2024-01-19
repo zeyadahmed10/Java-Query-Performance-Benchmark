@@ -1,5 +1,12 @@
 package com.orm.querybenchmark;
 
+import org.junit.jupiter.api.Test;
+import org.openjdk.jmh.results.format.ResultFormatType;
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
+
 abstract public class AbstractBenchmark {
     private final static Integer MEASUREMENT_ITERATIONS = 3;
     private final static Integer WARMUP_ITERATIONS = 3;
@@ -17,8 +24,8 @@ abstract public class AbstractBenchmark {
                 .threads(1)
                 .shouldDoGC(true)
                 .shouldFailOnError(true)
-                .resultFormat(ResultFormatType.JSON)
-                .result("/dev/null") // set this to a valid filename if you want reports
+                .resultFormat(ResultFormatType.CSV)
+                .result("src/main/resources/result.csv") // set this to a valid filename if you want reports
                 .shouldFailOnError(true)
                 .jvmArgs("-server")
                 .build();
