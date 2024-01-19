@@ -49,7 +49,7 @@ public class ActorDaoNativeImpl implements ActorDAO{
         String query = "SELECT Distinct act.actor_id, act.first_name, act.last_name FROM actor act " +
                 "JOIN film_actor ON act.actor_id = film_actor.actor_id " +
                 "JOIN (SELECT f.film_id FROM film f JOIN category cat " +
-                "ON f.category_id = cat.category_id WHERE cat.name = ? ) AS subfilm " +
+                "ON f.category_id = cat.category_id and cat.name = ? ) AS subfilm " +
                 "ON film_actor.film_id=subfilm.film_id;";
         try{
             return jdbcTemplate.query(query, new ActorRowMapper(), category);
@@ -63,7 +63,7 @@ public class ActorDaoNativeImpl implements ActorDAO{
     public List<Actor> findAllByFilmReleaseYear(Integer year) {
         String query = "select Distinct actor.actor_id, actor.first_name, actor.last_name" +
                 " from actor join film_actor fa on actor.actor_id = fa.actor_id\n" +
-                "join film f on fa.film_id = f.film_id where f.release_year = ?;";
+                "join film f on fa.film_id = f.film_id and f.release_year = ?;";
         try{
             return jdbcTemplate.query(query, new ActorRowMapper(), year);
         }catch (Exception e){

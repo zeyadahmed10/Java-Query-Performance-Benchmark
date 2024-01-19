@@ -2,6 +2,8 @@ package com.orm.querybenchmark.dao;
 
 import com.orm.querybenchmark.entity.Actor;
 import com.orm.querybenchmark.entity.QActor;
+import com.orm.querybenchmark.entity.QCategory;
+import com.orm.querybenchmark.entity.QFilm;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.Entity;
@@ -42,11 +44,22 @@ public class ActorDaoQueryDSLImpl implements ActorDAO {
 
     @Override
     public List<Actor> findAllByCategory(String category) {
-        return null;
+        QActor actor = QActor.actor;
+        QFilm film = QFilm.film;
+        QCategory qcategory = QCategory.category;
+        return queryFactory.select(actor).from(actor)
+                .join(actor.films,film)
+                .join(film.category, qcategory).on(qcategory.name.eq(category))
+                .fetch();
+
     }
 
     @Override
     public List<Actor> findAllByFilmReleaseYear(Integer year) {
-        return null;
+        QActor actor = QActor.actor;
+        QFilm film = QFilm.film;
+        return queryFactory.select(actor).from(actor)
+                .innerJoin(actor.films, film)
+                .where(film.releaseYear.eq(year)).fetch();
     }
 }
