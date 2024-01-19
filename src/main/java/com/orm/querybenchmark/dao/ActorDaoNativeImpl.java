@@ -46,7 +46,7 @@ public class ActorDaoNativeImpl implements ActorDAO{
 
     @Override
     public List<Actor> findAllByCategory(String category) {
-        String query = "SELECT act.* FROM actor act JOIN film_actor ON act.actor_id = film_actor.actor_id\n" +
+        String query = "SELECT Distinct act.actor_id, act.first_name, act.last_name FROM actor act JOIN film_actor ON act.actor_id = film_actor.actor_id\n" +
                 "JOIN (SELECT f.film_id FROM film f JOIN\n" +
                 "\t category cat ON f.category_id = cat.category_id WHERE cat.name = ? ) AS subfilm \n" +
                 "\t ON film_actor.film_id=subfilm.film_id;";
