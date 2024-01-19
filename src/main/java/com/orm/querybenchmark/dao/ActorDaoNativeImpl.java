@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Slf4j
 @Repository
-public class NativeActorDaoImpl implements ActorDAO{
+public class ActorDaoNativeImpl implements ActorDAO{
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
