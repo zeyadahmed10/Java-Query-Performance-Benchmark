@@ -53,7 +53,18 @@ public class ActorDaoHqlImpl implements ActorDAO{
 
     @Override
     public List<Actor> findAllByCategory(String category) {
-        return null;
+        List<Actor> actors = null;
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            String hql = "from Actor act join act.films f join f.category cat where cat.name = :category";
+            Query query = session.createQuery(hql, Actor.class);
+            query.setParameter("category", category );
+            actors = query.getResultList();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return actors;
     }
 
     @Override
