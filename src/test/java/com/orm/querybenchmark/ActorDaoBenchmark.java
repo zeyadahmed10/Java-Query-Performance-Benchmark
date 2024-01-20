@@ -15,26 +15,26 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
-public class ActorDaoHqlImplBenchmark extends AbstractBenchmark{
+public class ActorDaoBenchmark extends AbstractBenchmark{
     private static ActorDAO actorDAO;
     @Autowired
-    public void setActorDAO(@Qualifier("actorDaoHqlImpl") ActorDAO actorDAO){
-        ActorDaoHqlImplBenchmark.actorDAO = actorDAO;
+    public void setActorDAO(ActorDAO actorDAO){
+        ActorDaoBenchmark.actorDAO = actorDAO;
     }
     @Benchmark
     public void benchmarkFindAll(){
-        ActorDaoHqlImplBenchmark.actorDAO.findAll();
+        ActorDaoBenchmark.actorDAO.findAll();
     }
     @Benchmark
     public void benchmarkFindById(){
-        ActorDaoHqlImplBenchmark.actorDAO.findById(1);
+        ActorDaoBenchmark.actorDAO.findById(1);
     }
     @Benchmark
     public void benchmarkFindAllByCategory(){
-        ActorDaoHqlImplBenchmark.actorDAO.findAllByCategory("Travel");
+        ActorDaoBenchmark.actorDAO.findAllByCategory("Travel");
     }
     @Benchmark
     public void benchmarkFindAllByReleaseYear(){
-        ActorDaoHqlImplBenchmark.actorDAO.findAllByFilmReleaseYear(2006);
+        ActorDaoBenchmark.actorDAO.findAllByFilmReleaseYear(2006);
     }
 }
