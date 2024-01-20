@@ -6,10 +6,16 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.test.context.ActiveProfiles;
 
+import java.util.concurrent.TimeUnit;
+@ActiveProfiles("native")
 abstract public class AbstractBenchmark {
-    private final static Integer MEASUREMENT_ITERATIONS = 3;
-    private final static Integer WARMUP_ITERATIONS = 3;
+    private final static Integer MEASUREMENT_ITERATIONS = 20;
+    private final static Integer WARMUP_ITERATIONS = 5;
+    @Value("${jmh.result.path}")
+    private String path;
 
     @Test
     public void executeJmhRunner() throws RunnerException {
@@ -18,14 +24,16 @@ abstract public class AbstractBenchmark {
                 .include("\\." + this.getClass().getSimpleName() + "\\.")
                 .warmupIterations(WARMUP_ITERATIONS)
                 .measurementIterations(MEASUREMENT_ITERATIONS)
+                .timeUnit(TimeUnit.MILLISECONDS)
                 // do not use forking or the benchmark methods will not see references stored within its class
                 .forks(0)
                 // do not use multiple threads
                 .threads(1)
                 .shouldDoGC(true)
                 .shouldFailOnError(true)
-                .resultFormat(ResultFormatType.CSV)
-                .result("src/main/resources/result.csv") // set this to a valid filename if you want reports
+                .resultFormat(ResultFormatType.JSON)
+                .result(path)
+                //.result("src/main/resources/result.json") // set this to a valid filename if you want reports
                 .shouldFailOnError(true)
                 .jvmArgs("-server")
                 .build();
