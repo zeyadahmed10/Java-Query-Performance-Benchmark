@@ -4,6 +4,7 @@ import com.orm.querybenchmark.entity.Actor;
 import com.orm.querybenchmark.mappers.ActorRowMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Slf4j
 @Repository
+@Profile("native")
 public class ActorDaoNativeImpl implements ActorDAO{
     @Autowired
     private JdbcTemplate jdbcTemplate;

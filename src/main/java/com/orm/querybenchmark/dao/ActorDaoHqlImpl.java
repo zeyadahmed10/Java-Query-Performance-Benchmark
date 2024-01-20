@@ -7,11 +7,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Slf4j
 @Repository
+@Profile("hql")
 public class ActorDaoHqlImpl implements ActorDAO{
     @Autowired
     private SessionFactory sessionFactory;

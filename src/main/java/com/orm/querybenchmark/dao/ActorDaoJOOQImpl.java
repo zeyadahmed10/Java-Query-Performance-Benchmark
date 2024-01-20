@@ -12,6 +12,7 @@ import org.jooq.DSLContext;
 import org.jooq.SelectConditionStep;
 import org.jooq.generated.public_.tables.Category;
 import org.jooq.impl.DSL;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Repository
 @Slf4j
+@Profile("jooq")
 public class ActorDaoJOOQImpl implements ActorDAO{
 
     private final DSLContext dslContext;

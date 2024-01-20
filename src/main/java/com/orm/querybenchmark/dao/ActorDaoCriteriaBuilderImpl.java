@@ -11,11 +11,13 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Slf4j
 @Repository
+@Profile("criteria")
 public class ActorDaoCriteriaBuilderImpl implements ActorDAO{
     //note less error-prone always runs from the first type as its type safe but its verbose and need more writing
     @Autowired
