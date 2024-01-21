@@ -3,6 +3,7 @@ package com.orm.querybenchmark.dao;
 import com.orm.querybenchmark.entity.Actor;
 import jakarta.persistence.Query;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.CacheMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class ActorDaoHqlImpl implements ActorDAO{
     public List<Actor> findAll() {
         List<Actor> actors = null;
         try(Session session = sessionFactory.openSession()){
+            session.setCacheMode(CacheMode.IGNORE); //disabling first level caching
             session.beginTransaction();
             String hql = "from Actor";
             Query query = session.createQuery(hql, Actor.class);
@@ -36,6 +38,7 @@ public class ActorDaoHqlImpl implements ActorDAO{
     public Actor findById(Integer id) {
         Actor actor = null;
         try(Session session = sessionFactory.openSession()){
+            session.setCacheMode(CacheMode.IGNORE); //disabling first level caching
             session.beginTransaction();
             String hql = "from Actor where id = :id";
             Query query = session.createQuery(hql, Actor.class);
@@ -57,6 +60,7 @@ public class ActorDaoHqlImpl implements ActorDAO{
     public List<Actor> findAllByCategory(String category) {
         List<Actor> actors = null;
         try (Session session = sessionFactory.openSession()) {
+            session.setCacheMode(CacheMode.IGNORE); //disabling first level caching
             session.beginTransaction();
             String hql = "from Actor act join act.films f join f.category cat where cat.name = :category";
             Query query = session.createQuery(hql, Actor.class);
@@ -73,6 +77,7 @@ public class ActorDaoHqlImpl implements ActorDAO{
     public List<Actor> findAllByFilmReleaseYear(Integer year) {
         List<Actor> actors = null;
         try(Session session = sessionFactory.openSession()){
+            session.setCacheMode(CacheMode.IGNORE); //disabling first level caching
             session.beginTransaction();
             String hql = "from Actor act JOIN act.films f where f.releaseYear = :year ";
             Query query = session.createQuery(hql, Actor.class);
