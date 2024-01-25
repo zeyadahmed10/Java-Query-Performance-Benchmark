@@ -31,9 +31,10 @@ public class ActorDaoCriteriaBuilderImpl implements ActorDAO{
     @Override
     public List<Actor> findAll() {
         List<Actor> actors = null;
-        try(Session session = sessionFactory.getCurrentSession()){
+        try{
+            Session session = entityManager.unwrap(Session.class);
             session.setCacheMode(CacheMode.IGNORE);
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             var criteriaQuery = criteriaBuilder.createQuery(Actor.class);
             var root = criteriaQuery.from(Actor.class);
             criteriaQuery.select(root);
@@ -47,9 +48,10 @@ public class ActorDaoCriteriaBuilderImpl implements ActorDAO{
     @Override
     public Actor findById(Integer id) {
         Actor actor = null;
-        try(Session session = sessionFactory.getCurrentSession()){
+        try{
+            Session session = entityManager.unwrap(Session.class);
             session.setCacheMode(CacheMode.IGNORE);
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             var criteriaQuery = criteriaBuilder.createQuery(Actor.class);
             var root = criteriaQuery.from(Actor.class);
             var condition = criteriaBuilder.equal(root.get("id"), id);
@@ -69,9 +71,10 @@ public class ActorDaoCriteriaBuilderImpl implements ActorDAO{
     @Override
     public List<Actor> findAllByCategory(String category) {
         List<Actor> actors = null;
-        try(Session session = sessionFactory.getCurrentSession()){
+        try{
+            Session session = entityManager.unwrap(Session.class);
             session.setCacheMode(CacheMode.IGNORE);
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             var criteriaQuery = criteriaBuilder.createQuery(Actor.class);
             Root<Actor> actorRoot = criteriaQuery.from(Actor.class);
             Join<Actor, Film> actorFilmJoin = actorRoot.join("films");
@@ -88,9 +91,10 @@ public class ActorDaoCriteriaBuilderImpl implements ActorDAO{
     @Override
     public List<Actor> findAllByFilmReleaseYear(Integer year) {
         List<Actor> actors = null;
-        try(Session session = sessionFactory.getCurrentSession()){
+        try{
+            Session session = entityManager.unwrap(Session.class);
             session.setCacheMode(CacheMode.IGNORE);
-            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
             var criteriaQuery = criteriaBuilder.createQuery(Actor.class);
             var actorRoot = criteriaQuery.from(Actor.class);
             Join<Actor, Film>  actorFilmJoin = actorRoot.join("films");

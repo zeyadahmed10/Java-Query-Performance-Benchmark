@@ -8,7 +8,10 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.annotation.PostConstruct;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.CacheMode;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
@@ -22,7 +25,10 @@ public class ActorDaoQueryDSLImpl implements ActorDAO {
     private final JPAQueryFactory queryFactory;
 
     public ActorDaoQueryDSLImpl(EntityManager entityManager) {
-        this.queryFactory = new JPAQueryFactory(entityManager);
+            Session session = entityManager.unwrap(Session.class);
+            session.setCacheMode(CacheMode.IGNORE);
+            this.queryFactory = new JPAQueryFactory(entityManager);
+
     }
 
     @Override

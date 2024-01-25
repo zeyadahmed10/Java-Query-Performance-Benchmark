@@ -22,7 +22,7 @@ public class ActorDaoHqlImpl implements ActorDAO{
     public List<Actor> findAll() {
         List<Actor> actors = null;
         try(Session session = sessionFactory.openSession()){
-            session.setCacheMode(CacheMode.IGNORE); //disabling first level caching
+            session.setCacheMode(CacheMode.IGNORE);
             session.beginTransaction();
             String hql = "from Actor";
             Query query = session.createQuery(hql, Actor.class);
@@ -60,7 +60,7 @@ public class ActorDaoHqlImpl implements ActorDAO{
     public List<Actor> findAllByCategory(String category) {
         List<Actor> actors = null;
         try (Session session = sessionFactory.openSession()) {
-            session.setCacheMode(CacheMode.IGNORE); //disabling first level caching
+            session.setCacheMode(CacheMode.IGNORE); //disabling caching
             session.beginTransaction();
             String hql = "from Actor act join act.films f join f.category cat where cat.name = :category";
             Query query = session.createQuery(hql, Actor.class);

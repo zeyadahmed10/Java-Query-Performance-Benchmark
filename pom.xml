@@ -91,7 +91,7 @@
 				<configuration>
 					<jdbc>
 						<driver>org.postgresql.Driver</driver>
-						<url>jdbc:postgresql://localhost:5432/spagila</url>
+						<url>jdbc:postgresql://localhost:5432/imdb_small</url>
 						<user>zeyad</user>
 						<password>postgres</password>
 					</jdbc>

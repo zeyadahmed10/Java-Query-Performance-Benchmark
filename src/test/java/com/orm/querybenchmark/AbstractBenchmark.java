@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.concurrent.TimeUnit;
-@ActiveProfiles("native")
+@ActiveProfiles("qdsl")
 abstract public class AbstractBenchmark {
-    private final static Integer MEASUREMENT_ITERATIONS = 20;
-    private final static Integer WARMUP_ITERATIONS = 5;
+    private final static Integer MEASUREMENT_ITERATIONS = 10;
+    private final static Integer WARMUP_ITERATIONS = 3;
     @Value("${jmh.result.path}")
     private String path;
 

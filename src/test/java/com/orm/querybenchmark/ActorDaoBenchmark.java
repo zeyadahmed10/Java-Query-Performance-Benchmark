@@ -27,14 +27,14 @@ public class ActorDaoBenchmark extends AbstractBenchmark{
     }
     @Benchmark
     public void benchmarkFindById(){
-        ActorDaoBenchmark.actorDAO.findById(1);
+        ActorDaoBenchmark.actorDAO.findById(580467);
     }
     @Benchmark
     public void benchmarkFindAllByCategory(){
-        ActorDaoBenchmark.actorDAO.findAllByCategory("Travel");
+        ActorDaoBenchmark.actorDAO.findAllByCategory("Drama");
     }
     @Benchmark
     public void benchmarkFindAllByReleaseYear(){
-        ActorDaoBenchmark.actorDAO.findAllByFilmReleaseYear(2006);
+        ActorDaoBenchmark.actorDAO.findAllByFilmReleaseYear(1991);
     }
 }
