@@ -17,9 +17,7 @@ public class Film {
     @Column(name = "film_id", nullable = false)
     private Integer id;
     private String title;
-    private String description;
     private Integer releaseYear;
-    private String rating;
     @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinTable(
             name = "film_actor",
